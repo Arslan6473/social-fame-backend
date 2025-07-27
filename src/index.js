@@ -30,6 +30,20 @@ connectDB()
     app.use(express.urlencoded({ limit: "16kb", extended: true }));
     app.use(express.static("public"));
 
+    // Test route
+    app.get("/", (req, res) => {
+      res.status(200).json({
+        success: true,
+        message: "Welcome to the API",
+        endpoints: {
+          users: "/users",
+          posts: "/posts",
+        },
+        status: "Server is running",
+        timestamp: new Date().toISOString(),
+      });
+    });
+
     // Routes
     app.use("/users", userRoutes);
     app.use("/posts", postRoutes);
